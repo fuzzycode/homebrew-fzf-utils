@@ -14,7 +14,7 @@ HFU_INFO='brew info {}'
 HFU_BIND='ctrl-space:execute-silent(brew home {})'
 
 function hfu_install_formulae() {
-    local formulae=$(brew formulae | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND)
+    local formulae=$(echo $(brew formulae | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND))
 
     if [[ $formulae ]]; then
         for formula in $formulae; do
@@ -24,7 +24,7 @@ function hfu_install_formulae() {
 }
 
 function hfu_install_cask() {
-    local casks=$(brew casks | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND)
+    local casks=$(echo $(brew casks | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND))
 
     if [[ $casks ]]; then
         for cask in $casks; do
@@ -34,7 +34,7 @@ function hfu_install_cask() {
 }
 
 function hfu_uninstall() {
-    local leaves=$(brew leaves | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND)
+    local leaves=$(echo $(brew leaves | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND))
 
     if [[ $leaves ]]; then
         for leaf in $leaves; do
@@ -44,7 +44,7 @@ function hfu_uninstall() {
 }
 
 function hfu_update() {
-    local outdated=$(brew outdated -q | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND)
+    local outdated=$(echo $(brew outdated -q | fzf --query="$1" -m --preview $HFU_INFO --bind $HFU_BIND))
 
     if [[ $outdated ]]; then
         for formula in $outdated; do
